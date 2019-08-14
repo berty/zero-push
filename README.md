@@ -1,10 +1,8 @@
 <h1 align="center">
-  <br>
-  <img src="https://berty.tech/img/berty.svg" alt="The Berty Project" height="300px">
-  <br>
+  Zero-push
 </h1>
 
-<h3 align="center">Berty is a secure peer-to-peer messaging app that works with or without internet access, cellular data or trust in the network.</h3>
+<p align="center">Zero-Push is a Berty component used to send push notifications from a server without a central token repository.</p>
 
 <p align="center"><b>
     <a href="https://berty.tech">berty.tech</a> •

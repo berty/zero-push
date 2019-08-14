@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package berty.push;
+
+option go_package = "github.com/berty/zero-push/proto";
+
+import "gogoproto/gogo.proto";
+import "proto/push.proto";
+
+service PushService {
+  rpc PushTo (push.PushToInput) returns (push.Void) {};
+}
+
