@@ -1,14 +1,14 @@
 package push
 
 import (
+	zpErrors "berty.tech/zero-push/errors"
+	"berty.tech/zero-push/proto"
 	"context"
 	"crypto"
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/x509"
 	"encoding/pem"
-	zpErrors "github.com/berty/zero-push/errors"
-	"github.com/berty/zero-push/proto"
 	"github.com/pkg/errors"
 	"io/ioutil"
 )

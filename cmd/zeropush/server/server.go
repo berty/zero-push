@@ -1,9 +1,9 @@
 package server
 
 import (
+	"berty.tech/zero-push/proto"
+	"berty.tech/zero-push/server"
 	"fmt"
-	"github.com/berty/zero-push/proto"
-	"github.com/berty/zero-push/server"
 	"github.com/spf13/cobra"
 	"google.golang.org/grpc"
 	"net"

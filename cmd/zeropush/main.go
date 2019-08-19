@@ -1,8 +1,8 @@
 package main
 
 import (
+	server2 "berty.tech/zero-push/cmd/zeropush/server"
 	"fmt"
-	server2 "github.com/berty/zero-push/cmd/zeropush/server"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"

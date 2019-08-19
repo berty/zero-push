@@ -1,4 +1,4 @@
-module github.com/berty/zero-push
+module berty.tech/zero-push
 
 go 1.12
 

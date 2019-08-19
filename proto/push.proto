@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package berty.push;
 
-option go_package = "github.com/berty/zero-push/proto";
+option go_package = "berty.tech/zero-push/proto";
 
 import "gogoproto/gogo.proto";
 

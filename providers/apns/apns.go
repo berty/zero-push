@@ -1,10 +1,10 @@
 package apns
 
 import (
+	"berty.tech/zero-push"
+	zpErrors "berty.tech/zero-push/errors"
+	"berty.tech/zero-push/proto"
 	"encoding/base64"
-	"github.com/berty/zero-push"
-	zpErrors "github.com/berty/zero-push/errors"
-	"github.com/berty/zero-push/proto"
 	"strings"
 
 	"github.com/pkg/errors"

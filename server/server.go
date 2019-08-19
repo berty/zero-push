@@ -1,13 +1,13 @@
 package server
 
 import (
+	"berty.tech/zero-push"
+	"berty.tech/zero-push/errors"
+	"berty.tech/zero-push/proto"
+	"berty.tech/zero-push/providers/apns"
+	"berty.tech/zero-push/providers/fcm"
 	"context"
 	"fmt"
-	"github.com/berty/zero-push"
-	"github.com/berty/zero-push/errors"
-	"github.com/berty/zero-push/proto"
-	"github.com/berty/zero-push/providers/apns"
-	"github.com/berty/zero-push/providers/fcm"
 	"strings"
 )
 
