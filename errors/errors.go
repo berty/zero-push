@@ -3,7 +3,7 @@ package errors
 import "errors"
 
 var ErrPushInvalidServerConfig = errors.New("invalid push server config")
-var ErrPushMissingBundleId = errors.New("missing bundle id for push")
+var ErrPushMissingBundleID = errors.New("missing bundle id for push")
 var ErrPushUnknownDestination = errors.New("invalid push destination")
 var ErrPushProvider = errors.New("an error occurred while sending push")
 var ErrPushUnknownProvider = errors.New("unknown push type")

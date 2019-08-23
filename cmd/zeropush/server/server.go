@@ -38,13 +38,12 @@ func init() {
 	Command.PersistentFlags().StringVar(&currentServerOptions.grpcBind, "grpc-bind", ":1337", "gRPC listening address")
 	Command.PersistentFlags().StringSliceVar(&currentServerOptions.apnsCerts, "apns-certs", []string{}, "Path of APNs certificates, delimited by commas")
 	Command.PersistentFlags().StringSliceVar(&currentServerOptions.apnsDevVoipCerts, "apns-dev-voip-certs", []string{}, "Path of APNs VoIP development certificates, delimited by commas")
-	Command.PersistentFlags().StringSliceVar(&currentServerOptions.fcmAPIKeys, "fcm-api-keys", []string{}, "API keys for Firebase Cloud Messaging, in the form packageid:token, delimited by commas")
+	Command.PersistentFlags().StringSliceVar(&currentServerOptions.fcmAPIKeys, "fcm-api-keys", []string{}, "API keys for Firebase Cloud Messaging, in the form package_id:token, delimited by commas")
 	Command.PersistentFlags().StringVar(&currentServerOptions.pushJSONKey, "push-json-key", "", "In which JSON key the payload should be put")
 }
 
 func defaultServerOptions() {
 }
-
 
 func runServer() error {
 	lis, err := net.Listen("tcp", currentServerOptions.grpcBind)
@@ -69,7 +68,5 @@ func runServer() error {
 	grpcServer := grpc.NewServer()
 	proto.RegisterPushServiceServer(grpcServer, s)
 
-	grpcServer.Serve(lis)
-
-	return nil
+	return grpcServer.Serve(lis)
 }

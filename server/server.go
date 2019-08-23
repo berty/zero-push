@@ -12,12 +12,12 @@ import (
 )
 
 type Config struct {
-	GrpcBind             string   `protobuf:"bytes,1,opt,name=grpcBind,proto3" json:"grpcBind,omitempty"`
-	ApnsCerts            []string `protobuf:"bytes,2,rep,name=apnsCerts,proto3" json:"apnsCerts,omitempty"`
-	ApnsDevVoipCerts     []string `protobuf:"bytes,3,rep,name=apnsDevVoipCerts,proto3" json:"apnsDevVoipCerts,omitempty"`
-	FcmAPIKeys           []string `protobuf:"bytes,4,rep,name=fcmAPIKeys,proto3" json:"fcmAPIKeys,omitempty"`
-	PrivateKeyFile       string   `protobuf:"bytes,5,opt,name=privateKeyFile,proto3" json:"privateKeyFile,omitempty"`
-	PushJSONKey          string   `protobuf:"bytes,6,opt,name=pushJSONKey,proto3" json:"pushJSONKey,omitempty"`
+	GrpcBind         string   `protobuf:"bytes,1,opt,name=grpcBind,proto3" json:"grpcBind,omitempty"`
+	ApnsCerts        []string `protobuf:"bytes,2,rep,name=apnsCerts,proto3" json:"apnsCerts,omitempty"`
+	ApnsDevVoipCerts []string `protobuf:"bytes,3,rep,name=apnsDevVoipCerts,proto3" json:"apnsDevVoipCerts,omitempty"`
+	FcmAPIKeys       []string `protobuf:"bytes,4,rep,name=fcmAPIKeys,proto3" json:"fcmAPIKeys,omitempty"`
+	PrivateKeyFile   string   `protobuf:"bytes,5,opt,name=privateKeyFile,proto3" json:"privateKeyFile,omitempty"`
+	PushJSONKey      string   `protobuf:"bytes,6,opt,name=pushJSONKey,proto3" json:"pushJSONKey,omitempty"`
 }
 
 func BuildServer(cfg *Config) (*Server, error) {

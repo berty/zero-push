@@ -17,13 +17,13 @@ import (
 const asn1UID = "0.9.2342.19200300.100.1.1"
 const appleCertDevNamePart = "Apple Development IOS Push Services"
 
-type APNSDispatcher struct {
+type Dispatcher struct {
 	bundleID    string
 	client      *apns2.Client
 	jsonDataKey string
 }
 
-var _ push.Dispatcher = &APNSDispatcher{}
+var _ push.Dispatcher = &Dispatcher{}
 
 func NewAPNSDispatcher(path string, forceDev bool, jsonDataKey string) (push.Dispatcher, error) {
 	cert, err := certificate.FromP12File(path, "")
@@ -42,7 +42,7 @@ func NewAPNSDispatcher(path string, forceDev bool, jsonDataKey string) (push.Dis
 	}
 
 	if bundleID == "" {
-		return nil, zpErrors.ErrPushMissingBundleId
+		return nil, zpErrors.ErrPushMissingBundleID
 	}
 
 	production := !strings.Contains(cert.Leaf.Subject.CommonName, appleCertDevNamePart)
@@ -55,7 +55,7 @@ func NewAPNSDispatcher(path string, forceDev bool, jsonDataKey string) (push.Dis
 		client = client.Development()
 	}
 
-	dispatcher := &APNSDispatcher{
+	dispatcher := &Dispatcher{
 		bundleID:    bundleID,
 		client:      client,
 		jsonDataKey: jsonDataKey,
@@ -64,7 +64,7 @@ func NewAPNSDispatcher(path string, forceDev bool, jsonDataKey string) (push.Dis
 	return dispatcher, nil
 }
 
-func (d *APNSDispatcher) CanDispatch(pushDestination *proto.PushDestination) bool {
+func (d *Dispatcher) CanDispatch(pushDestination *proto.PushDestination) bool {
 	if pushDestination.PushType != proto.DevicePushType_APNS {
 		return false
 	}
@@ -81,7 +81,7 @@ func (d *APNSDispatcher) CanDispatch(pushDestination *proto.PushDestination) boo
 	return true
 }
 
-func (d *APNSDispatcher) Dispatch(pushData *proto.PushData, pushDestination *proto.PushDestination) error {
+func (d *Dispatcher) Dispatch(pushData *proto.PushData, pushDestination *proto.PushDestination) error {
 	apnsIdentifier := &proto.PushNativeIdentifier{}
 	if err := apnsIdentifier.Unmarshal(pushDestination.PushId); err != nil {
 		return errors.Wrap(err, zpErrors.ErrPushUnknownDestination.Error())

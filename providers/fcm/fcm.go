@@ -11,7 +11,7 @@ import (
 	"github.com/NaySoftware/go-fcm"
 )
 
-type FCMDispatcher struct {
+type Dispatcher struct {
 	client      *fcm.FcmClient
 	appID       string
 	jsonDataKey string
@@ -28,7 +28,7 @@ func NewFCMDispatcher(appIDApiKey string, jsonDataKey string) (push.Dispatcher, 
 
 	client := fcm.NewFcmClient(apiKey)
 
-	dispatcher := &FCMDispatcher{
+	dispatcher := &Dispatcher{
 		client:      client,
 		appID:       appID,
 		jsonDataKey: jsonDataKey,
@@ -37,7 +37,7 @@ func NewFCMDispatcher(appIDApiKey string, jsonDataKey string) (push.Dispatcher, 
 	return dispatcher, nil
 }
 
-func (d *FCMDispatcher) CanDispatch(pushDestination *proto.PushDestination) bool {
+func (d *Dispatcher) CanDispatch(pushDestination *proto.PushDestination) bool {
 	if pushDestination.PushType != proto.DevicePushType_FCM {
 		return false
 	}
@@ -54,7 +54,7 @@ func (d *FCMDispatcher) CanDispatch(pushDestination *proto.PushDestination) bool
 	return true
 }
 
-func (d *FCMDispatcher) Dispatch(pushData *proto.PushData, pushDestination *proto.PushDestination) error {
+func (d *Dispatcher) Dispatch(pushData *proto.PushData, pushDestination *proto.PushDestination) error {
 	fcmIdentifier := &proto.PushNativeIdentifier{}
 	if err := fcmIdentifier.Unmarshal(pushDestination.PushId); err != nil {
 		return errors.Wrap(err, zpErrors.ErrPushUnknownDestination.Error())
@@ -72,4 +72,4 @@ func (d *FCMDispatcher) Dispatch(pushData *proto.PushData, pushDestination *prot
 	return nil
 }
 
-var _ push.Dispatcher = &FCMDispatcher{}
+var _ push.Dispatcher = &Dispatcher{}
