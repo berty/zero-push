@@ -1,15 +1,15 @@
 package main
 
 import (
-	server2 "berty.tech/zero-push/cmd/zeropush/server"
 	"fmt"
+	"os"
+	"strings"
+
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"go.uber.org/zap/zaptest"
-	"os"
-	"strings"
 )
 
 var rootCmd = &cobra.Command{
@@ -24,8 +24,6 @@ var rootCmd = &cobra.Command{
 func execute() {
 	viper.AutomaticEnv()
 	viper.SetEnvKeyReplacer(strings.NewReplacer("-", "_"))
-
-	rootCmd.AddCommand(server2.Command)
 
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)

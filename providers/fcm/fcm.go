@@ -1,14 +1,15 @@
 package fcm
 
 import (
-	push "berty.tech/zero-push"
-	zpErrors "berty.tech/zero-push/errors"
-	"berty.tech/zero-push/proto"
 	"encoding/base64"
-	"github.com/pkg/errors"
 	"strings"
 
-	"github.com/NaySoftware/go-fcm"
+	push "berty.tech/zero-push"
+	zpErrors "berty.tech/zero-push/errors"
+	proto "berty.tech/zero-push/proto/push"
+	"github.com/pkg/errors"
+
+	fcm "github.com/NaySoftware/go-fcm"
 )
 
 type Dispatcher struct {

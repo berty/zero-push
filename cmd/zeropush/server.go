@@ -1,13 +1,14 @@
-package server
+package main
 
 import (
-	"berty.tech/zero-push/proto"
-	"berty.tech/zero-push/server"
 	"fmt"
-	"github.com/spf13/cobra"
-	"google.golang.org/grpc"
 	"net"
 	"os"
+
+	proto_service "berty.tech/zero-push/proto/service"
+	"berty.tech/zero-push/server"
+	"github.com/spf13/cobra"
+	"google.golang.org/grpc"
 )
 
 type serverOptions struct {
@@ -30,16 +31,6 @@ var Command = &cobra.Command{
 			os.Exit(1)
 		}
 	},
-}
-
-func init() {
-	cobra.OnInitialize(defaultServerOptions)
-	Command.PersistentFlags().StringVar(&currentServerOptions.privateKeyFile, "private-key-file", "", "set private key file for node")
-	Command.PersistentFlags().StringVar(&currentServerOptions.grpcBind, "grpc-bind", ":1337", "gRPC listening address")
-	Command.PersistentFlags().StringSliceVar(&currentServerOptions.apnsCerts, "apns-certs", []string{}, "Path of APNs certificates, delimited by commas")
-	Command.PersistentFlags().StringSliceVar(&currentServerOptions.apnsDevVoipCerts, "apns-dev-voip-certs", []string{}, "Path of APNs VoIP development certificates, delimited by commas")
-	Command.PersistentFlags().StringSliceVar(&currentServerOptions.fcmAPIKeys, "fcm-api-keys", []string{}, "API keys for Firebase Cloud Messaging, in the form package_id:token, delimited by commas")
-	Command.PersistentFlags().StringVar(&currentServerOptions.pushJSONKey, "push-json-key", "", "In which JSON key the payload should be put")
 }
 
 func defaultServerOptions() {
@@ -66,7 +57,19 @@ func runServer() error {
 	logger().Info(fmt.Sprintf("Starting push server, listening on %s", currentServerOptions.grpcBind))
 
 	grpcServer := grpc.NewServer()
-	proto.RegisterPushServiceServer(grpcServer, s)
+	proto_service.RegisterPushServiceServer(grpcServer, s)
 
 	return grpcServer.Serve(lis)
+}
+
+func init() {
+	cobra.OnInitialize(defaultServerOptions)
+	Command.PersistentFlags().StringVar(&currentServerOptions.privateKeyFile, "private-key-file", "", "set private key file for node")
+	Command.PersistentFlags().StringVar(&currentServerOptions.grpcBind, "grpc-bind", ":1337", "gRPC listening address")
+	Command.PersistentFlags().StringSliceVar(&currentServerOptions.apnsCerts, "apns-certs", []string{}, "Path of APNs certificates, delimited by commas")
+	Command.PersistentFlags().StringSliceVar(&currentServerOptions.apnsDevVoipCerts, "apns-dev-voip-certs", []string{}, "Path of APNs VoIP development certificates, delimited by commas")
+	Command.PersistentFlags().StringSliceVar(&currentServerOptions.fcmAPIKeys, "fcm-api-keys", []string{}, "API keys for Firebase Cloud Messaging, in the form package_id:token, delimited by commas")
+	Command.PersistentFlags().StringVar(&currentServerOptions.pushJSONKey, "push-json-key", "", "In which JSON key the payload should be put")
+
+	rootCmd.AddCommand(Command)
 }

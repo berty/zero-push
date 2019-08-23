@@ -1,16 +1,17 @@
 package push
 
 import (
-	zpErrors "berty.tech/zero-push/errors"
-	"berty.tech/zero-push/proto"
 	"context"
 	"crypto"
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/x509"
 	"encoding/pem"
-	"github.com/pkg/errors"
 	"io/ioutil"
+
+	zpErrors "berty.tech/zero-push/errors"
+	proto "berty.tech/zero-push/proto/push"
+	"github.com/pkg/errors"
 )
 
 type Dispatcher interface {
