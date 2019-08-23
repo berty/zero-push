@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package berty.push;
 
-option go_package = "berty.tech/zero-push/proto";
+option go_package = "berty.tech/zero-push/proto/push";
 
-import "gogoproto/gogo.proto";
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 
 message Void {}
 

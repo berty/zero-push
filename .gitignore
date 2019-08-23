@@ -1,4 +1,5 @@
-vendor
+# OSX
+.DS_Store
 
 # Junk files
 *~
@@ -17,3 +18,6 @@ vendor
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+
+# golang
+vendor

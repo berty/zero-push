@@ -1,14 +1,16 @@
 package server
 
 import (
-	"berty.tech/zero-push"
-	"berty.tech/zero-push/errors"
-	"berty.tech/zero-push/proto"
-	"berty.tech/zero-push/providers/apns"
-	"berty.tech/zero-push/providers/fcm"
 	"context"
 	"fmt"
 	"strings"
+
+	push "berty.tech/zero-push"
+	"berty.tech/zero-push/errors"
+	proto_push "berty.tech/zero-push/proto/push"
+	proto_service "berty.tech/zero-push/proto/service"
+	"berty.tech/zero-push/providers/apns"
+	"berty.tech/zero-push/providers/fcm"
 )
 
 type Config struct {
@@ -85,14 +87,14 @@ type Server struct {
 	config      *Config
 }
 
-func (s *Server) PushTo(ctx context.Context, pushToInput *proto.PushToInput) (*proto.Void, error) {
+func (s *Server) PushTo(ctx context.Context, pushToInput *proto_push.PushToInput) (*proto_push.Void, error) {
 	for _, pushData := range pushToInput.PushData {
 		if err := s.pushManager.PushTo(ctx, pushData); err != nil {
-			return &proto.Void{}, err
+			return &proto_push.Void{}, err
 		}
 	}
 
-	return &proto.Void{}, nil
+	return &proto_push.Void{}, nil
 }
 
-var _ proto.PushServiceServer = &Server{}
+var _ proto_service.PushServiceServer = (*Server)(nil)
