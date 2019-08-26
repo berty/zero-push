@@ -9,3 +9,7 @@
     <a href="https://twitter.com/berty">Twitter</a> •
     <a href="https://github.com/berty">GitHub</a>
 </b></p>
+
+<p align="center">
+    🚧 Work in progress 🚧
+</p>
