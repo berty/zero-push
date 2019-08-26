@@ -4,7 +4,7 @@ package berty.push;
 
 option go_package = "berty.tech/zero-push/proto/push";
 
-import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "gogoproto/gogo.proto";
 
 message Void {}
 
